@@ -1,0 +1,7 @@
+com\captcha\controllers\UserController.class
+com\captcha\model\User.class
+com\captcha\services\Impl\UserServiceImpl.class
+com\captcha\services\UserService.class
+com\captcha\repositories\UserRepo.class
+com\captcha\CaptchaApplication.class
+com\captcha\utils\CaptchaUtil.class
