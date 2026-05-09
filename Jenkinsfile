@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        JAR_FILE = "target\\ROOT.jar"
+        JAR_FILE = "\\target\\ROOT.jar"
     }
     stages{
         stage('Checkout') {
