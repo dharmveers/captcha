@@ -41,7 +41,7 @@ pipeline{
         stage('Deploy JAR') {
             steps {
                 bat '''
-                start /B java -jar %JAR_FILE%
+                java -jar %JAR_FILE%
                 '''
             }
         }
