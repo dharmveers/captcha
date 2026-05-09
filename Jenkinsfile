@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        JAR_FILE = "\\target\\ROOT.jar"
+        JAR_FILE = "target\\ROOT.jar"
     }
     stages{
         stage('Checkout') {
@@ -40,9 +40,9 @@ pipeline{
         }
         stage('Deploy JAR') {
             steps {
-                bat """
+                bat '''
                 start /B java -jar %JAR_FILE%
-                """
+                '''
             }
         }
     }
