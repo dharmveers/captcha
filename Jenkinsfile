@@ -40,8 +40,11 @@ pipeline{
         }
         stage('Deploy JAR') {
             steps {
-                bat '''
-                  wmic process call create "cmd /c java -jar C:\\\\ProgramData\\\\Jenkins\\\\.jenkins\\\\workspace\\\\praapti\\\\target\\\\ROOT.jar > C:\\\\ProgramData\\\\Jenkins\\\\.jenkins\\\\workspace\\\\praapti\\\\app.log 2>&1"
+                powershell '''
+                Start-Process java `
+                    -ArgumentList "-jar C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\praapti\\target\\ROOT.jar" `
+                    -RedirectStandardOutput "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\praapti\\app.log" `
+                    -RedirectStandardError "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\praapti\\error.log"
                 '''
             }
         }
