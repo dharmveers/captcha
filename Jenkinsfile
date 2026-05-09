@@ -31,15 +31,15 @@ pipeline{
         stage('Stop Existing App') {
             steps {
                 sh '''
-                    PID=$(lsof -t -i:8080)
-            
-                    if [ ! -z "$PID" ]; then
-                        echo "Stopping process on port 8080: $PID"
-                        kill -9 $PID
-                    else
-                        echo "No process running on port 8080"
-                    fi
-                    '''
+                PID=$(lsof -t -i:8080)
+        
+                if [ -n "$PID" ]; then
+                    echo "Stopping process on port 8080: $PID"
+                    kill -9 $PID
+                else
+                    echo "No process running on port 8080"
+                fi
+                '''
             }
         }
         stage('Deploy JAR') {
