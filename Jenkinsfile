@@ -45,7 +45,7 @@ pipeline{
         stage('Deploy JAR') {
             steps {
                 sh '''
-                BUILD_ID=dontKillMe nohup java -jar target/ROOT.jar > /tmp/logs/captcha-console.log 2>&1 &
+                setsid nohup java -jar target/ROOT.jar > /tmp/logs/captcha-console.log 2>&1 &
                 '''
             }
         }
