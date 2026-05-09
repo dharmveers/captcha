@@ -41,7 +41,7 @@ pipeline{
         stage('Deploy JAR') {
             steps {
                 bat '''
-                start /B java -jar %JAR_FILE%
+                  wmic process call create "cmd /c java -jar C:\\\\ProgramData\\\\Jenkins\\\\.jenkins\\\\workspace\\\\praapti\\\\target\\\\ROOT.jar > C:\\\\ProgramData\\\\Jenkins\\\\.jenkins\\\\workspace\\\\praapti\\\\app.log 2>&1"
                 '''
             }
         }
