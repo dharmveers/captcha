@@ -24,6 +24,21 @@ pipeline{
 //                }
 //            }
 //        }
+
+        stage('Stop Existing App') {
+            steps {
+                bat '''
+                for /f "tokens=5" %%a in ('netstat -aon ^| findstr :8080') do taskkill /F /PID %%a
+                '''
+            }
+        }
+        stage('Deploy JAR') {
+            steps {
+                bat """
+                start /B java -jar %JAR_FILE%
+                """
+            }
+        }
     }
     post {
         always {
