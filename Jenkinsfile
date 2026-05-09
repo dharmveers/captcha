@@ -12,7 +12,7 @@ pipeline{
         }
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
 //        stage('Deploy') {
@@ -30,17 +30,24 @@ pipeline{
 
         stage('Stop Existing App') {
             steps {
-                bat '''
-                for /F "tokens=5" %%a in ('netstat -aon ^| findstr :8080') do (
-                    taskkill /F /PID %%a
-                )  
-                exit /b 0
-                '''
+                steps {
+                    sh '''
+                    PID=$(lsof -t -i:8080)
+            
+                    if [ ! -z "$PID" ]; then
+                        kill -9 $PID
+                    fi
+            
+                    exit 0
+                    '''
+                }
             }
         }
         stage('Deploy JAR') {
             steps {
-                bat 'start "" /B java -jar %JAR_FILE%'
+                sh '''
+                nohup java -jar target/ROOT.jar > /tmp/logs/captcha-console.log 2>&1 &
+                '''
             }
         }
     }
