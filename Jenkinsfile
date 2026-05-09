@@ -31,7 +31,7 @@ pipeline{
         stage('Stop Existing App') {
             steps {
                 sh '''
-                PID=$(lsof -t -i:8080)
+                PID=$(lsof -t -i:8080 2>/dev/null || true)
         
                 if [ -n "$PID" ]; then
                     echo "Stopping process on port 8080: $PID"
