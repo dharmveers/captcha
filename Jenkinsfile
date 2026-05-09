@@ -30,8 +30,7 @@ pipeline{
 
         stage('Stop Existing App') {
             steps {
-                steps {
-                    sh '''
+                sh '''
                     PID=$(lsof -t -i:8080)
             
                     if [ ! -z "$PID" ]; then
@@ -40,7 +39,6 @@ pipeline{
             
                     exit 0
                     '''
-                }
             }
         }
         stage('Deploy JAR') {
