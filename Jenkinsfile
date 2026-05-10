@@ -46,10 +46,10 @@ pipeline{
         stage('Copy JAR') {
             steps {
                 sh '''
-                mkdir -p $DEPLOY_PATH
-                cp target/ROOT.jar $DEPLOY_PATH/ROOT.jar
+                mkdir -p DEPLOYMENT_PATH
+                cp target/ROOT.jar DEPLOYMENT_PATH/ROOT.jar
 
-                echo "JAR copied to $DEPLOY_PATH"
+                echo "JAR copied to DEPLOYMENT_PATH"
                 '''
             }
         }
@@ -57,7 +57,7 @@ pipeline{
             steps {
                 sh '''
                 mkdir -p $LOG_PATH
-                (nohup java -jar $DEPLOY_PATH/ROOT.jar > $LOG_PATH/captcha-console.log 2>&1 &)
+                (nohup java -jar DEPLOYMENT_PATH/ROOT.jar > $LOG_PATH/captcha-console.log 2>&1 &)
                 '''
             }
         }
