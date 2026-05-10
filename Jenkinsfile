@@ -57,7 +57,8 @@ pipeline{
             steps {
                 sh '''
                 mkdir -p $LOG_PATH
-                nohup setsid java -jar $DEPLOYMENT_PATH/ROOT.jar > $LOG_PATH/captcha-console.log 2>&1 &
+                export BUILD_ID=dontKillMe
+                nohup java -jar $DEPLOYMENT_PATH/ROOT.jar > $LOG_PATH/captcha-console.log 2>&1 &
                 '''
             }
         }
