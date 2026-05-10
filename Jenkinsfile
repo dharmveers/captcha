@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment {
-        DEPLOYMENT_PATH="/var/captcha"
+        DEPLOYMENT_PATH="/opt/captcha"
         LOG_PATH= "/tmp/logs"
     }
     stages{
