@@ -2,7 +2,8 @@ pipeline{
     agent any
 
     environment {
-        JAR_FILE = "target\\ROOT.jar"
+        DEPLOYMENT_PATH="/var/captcha"
+        LOG_PATH= "/tmp/logs"
     }
     stages{
         stage('Checkout') {
@@ -42,10 +43,21 @@ pipeline{
                 '''
             }
         }
+        stage('Copy JAR') {
+            steps {
+                sh '''
+                mkdir -p $DEPLOY_PATH
+                cp target/ROOT.jar $DEPLOY_PATH/ROOT.jar
+
+                echo "JAR copied to $DEPLOY_PATH"
+                '''
+            }
+        }
         stage('Deploy JAR') {
             steps {
                 sh '''
-                setsid nohup java -jar target/ROOT.jar > /tmp/logs/captcha-console.log 2>&1 &
+                mkdir -p $LOG_PATH
+                (nohup java -jar $DEPLOY_PATH/ROOT.jar > $LOG_PATH/captcha-console.log 2>&1 &)
                 '''
             }
         }
