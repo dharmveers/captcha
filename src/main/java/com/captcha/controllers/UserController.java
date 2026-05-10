@@ -14,6 +14,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @GetMapping("/status")
+    public String runningStatus(){
+        return "Application running on port: 8080";
+    }
     @GetMapping("register")
     public User registerUser(){
         User user=new User();
